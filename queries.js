@@ -1,12 +1,12 @@
 //Conexion con la base de datos
 const Pool = require('pg').Pool
 const pool = new Pool({
-  user: 'irjazjswtqyafv',
-  host: 'ec2-52-17-53-249.eu-west-1.compute.amazonaws.com',
-  database: 'd8g0jcdl5ga9qf',
-  password: '25cdb5c17bd66eeeeccf96bb6e2d6269ceaa73036292884c890a3e77e5ba1a43',
+  user: 'egituliykvjiiy',
+  host: 'ec2-54-155-226-153.eu-west-1.compute.amazonaws.com',
+  database: 'd7bc39pq5tt2a4',
+  password: 'ed8c746c45e02ff5dae1829c615e48677e2b1a2ecbfe4c6f63ed53e1d556c02e',
   port: 5432,
-})
+}) 
 
 const get = (request, response) => {
   const id = parseInt(request.params.id)
