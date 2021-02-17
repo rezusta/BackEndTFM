@@ -135,6 +135,7 @@ const deleteAlumnoAsignatura = (request, response) => {
   })
 }
 const getAlumnos = (request, response) => {
+  console.log('GET Alumnos');
   pool.query('SELECT * FROM public.alumnos', (error, results) => {
     if (error) {
       throw error
