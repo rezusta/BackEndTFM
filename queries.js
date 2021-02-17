@@ -2,7 +2,6 @@
 const { Client } = require('pg')
 
 const connectionData = {
-
   user: 'egituliykvjiiy',
   host: 'ec2-54-155-226-153.eu-west-1.compute.amazonaws.com',
   database: 'd7bc39pq5tt2a4',
@@ -14,6 +13,8 @@ const connectionData = {
 }
 
 const pool = new Client(connectionData)
+
+pool.connect()
 
 const get = (request, response) => {
   const id = parseInt(request.params.id)
@@ -137,6 +138,7 @@ const deleteAlumnoAsignatura = (request, response) => {
 const getAlumnos = (request, response) => {
   console.log('GET Alumnos');
   pool.query('SELECT * FROM public.alumnos', (error, results) => {
+    console.log('Hay respuesta')
     if (error) {
       throw error
     }
