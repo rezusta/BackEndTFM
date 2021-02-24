@@ -70,6 +70,15 @@ const createAlumno = (request, response) => {
     response.status(201).send(`Ok`)
   })
 }
+const getAlumno = (request, response) => {
+  const NIA = parseInt(request.params.NIA)
+  pool.query('SELECT * FROM public.alumnos where NIA = $1', [NIA], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 const deleteAlumno = (request, response) => {
   const NIA = parseInt(request.params.NIA)
 
@@ -102,10 +111,19 @@ const createAsignatura = (request, response) => {
     response.status(201).send(`Ok`)
   })
 }
+const getAsignatura = (request, response) => {
+  const ID = parseInt(request.params.ID)
+  pool.query('SELECT * FROM public.asignaturas where ID = $1', [ID], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 const updateAsignatura = (request, response) => {
   const { ID, nombre, aula, dia, hora, año } = request.body
   pool.query(
-    'UPDATE public.asignatura SET nombre = $1, aula = $2, dia = $3, hora = $4, año = $5 WHERE ID = $6', [nombre, aula, dia, hora, año, ID],
+    'UPDATE public.asignaturas SET nombre = $1, aula = $2, dia = $3, hora = $4, año = $5 WHERE ID = $6', [nombre, aula, dia, hora, año, ID],
     (error, results) => {
       if (error) {
         throw error
@@ -113,6 +131,16 @@ const updateAsignatura = (request, response) => {
       response.status(200).send(`Modified`)
     }
   )
+}
+const deleteAsignatura = (request, response) => {
+  const ID = parseInt(request.params.ID)
+
+  pool.query('DELETE FROM public.asignaturas WHERE ID = $1', [ID], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).send(`Deleted`)
+  })
 }
 const createAlumnoAsignatura = (request, response) => {
   const { NIA, ID } = request.body
@@ -176,10 +204,13 @@ const getAsignaturasAlumno = (request, response) => {
 
 module.exports = {
   createAlumno,
+  getAlumno,
   deleteAlumno,
   updateAlumno,
   createAsignatura,
+  getAsignatura,
   updateAsignatura,
+  deleteAsignatura,
   createAlumnoAsignatura,
   deleteAlumnoAsignatura,
   getAlumnos,
