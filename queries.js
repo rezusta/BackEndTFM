@@ -115,7 +115,7 @@ const createAsignatura = (request, response) => {
     }
     response.status(201).send(`Ok`)
   })
-}
+} 
 const getAsignatura = (request, response) => {
   const ID = parseInt(request.params.ID)
   pool.query('SELECT * FROM public.asignaturas where "ID" = $1', [ID], (error, results) => {
