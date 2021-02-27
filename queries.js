@@ -65,7 +65,7 @@ const createAlumno = (request, response) => {
   pool.query('INSERT INTO public.alumnos ("NIA", "nombre", "apellido") VALUES ($1, $2, $3)', [NIA, nombre, apellido], 
     (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(201).send(`Ok`)
   })
@@ -74,7 +74,7 @@ const getAlumno = (request, response) => {
   const NIA = parseInt(request.params.NIA)
   pool.query('SELECT * FROM public.alumnos where "NIA" = $1', [NIA], (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).json(results.rows)
   })
@@ -84,7 +84,7 @@ const deleteAlumno = (request, response) => {
 
   pool.query('DELETE FROM public.alumnos WHERE "NIA" = $1', [NIA], (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).send(`Deleted`)
   })
@@ -95,7 +95,7 @@ const updateAlumno = (request, response) => {
     'UPDATE public.alumnos SET "NIA" = $1, "nombre" = $2, "apellido" = $3', [NIA, nombre, apellido],
     (error, results) => {
       if (error) {
-        throw error
+        response.status(400).send(`Error`)
       }
       response.status(200).send(`Modified`)
     }
@@ -106,7 +106,7 @@ const createAsignatura = (request, response) => {
   pool.query('INSERT INTO public.asignaturas ("nombre", "aula", "dia", "hora", "año") VALUES ($1, $2, $3, $4, $5)', [nombre, aula, dia, hora, año], 
     (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(201).send(`Ok`)
   })
@@ -115,7 +115,7 @@ const getAsignatura = (request, response) => {
   const ID = parseInt(request.params.ID)
   pool.query('SELECT * FROM public.asignaturas where "ID" = $1', [ID], (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).json(results.rows)
   })
@@ -126,7 +126,7 @@ const updateAsignatura = (request, response) => {
     'UPDATE public.asignaturas SET "nombre" = $1, "aula" = $2, "dia" = $3, "hora" = $4, "año" = $5 WHERE "ID" = $6', [nombre, aula, dia, hora, año, ID],
     (error, results) => {
       if (error) {
-        throw error
+        response.status(400).send(`Error`)
       }
       response.status(200).send(`Modified`)
     }
@@ -137,7 +137,7 @@ const deleteAsignatura = (request, response) => {
 
   pool.query('DELETE FROM public.asignaturas WHERE "ID" = $1', [ID], (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).send(`Deleted`)
   })
@@ -147,7 +147,7 @@ const createAlumnoAsignatura = (request, response) => {
   pool.query('INSERT INTO public.alumnos_asignaturas ("ID", "NIA") VALUES ($1, $2)', [NIA, ID], 
     (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(201).send(`Ok`)
   })
@@ -158,7 +158,7 @@ const deleteAlumnoAsignatura = (request, response) => {
 
   pool.query('DELETE FROM public.alumnos_asignaturas WHERE "NIA" = $1 and "ID" = $2', [NIA, ID], (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).send(`Deleted`)
   })
@@ -166,7 +166,7 @@ const deleteAlumnoAsignatura = (request, response) => {
 const getAlumnos = (request, response) => {
   pool.query('SELECT * FROM public.alumnos', (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).json(results.rows)
   })
@@ -174,7 +174,7 @@ const getAlumnos = (request, response) => {
 const getAsignaturas = (request, response) => {
   pool.query('SELECT * FROM public.asignaturas', (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).json(results.rows)
   })
@@ -186,7 +186,7 @@ const getAsignaturasAlumnoDia = (request, response) => {
   // Revisar
   pool.query('SELECT * FROM public.asignaturas WHERE "ID" IN (SELECT "ID" FROM public.alumnos_asignaturas where "NIA" = $1 ) and "dia" = $2', [NIA, dia], (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).json(results.rows)
   })
@@ -196,7 +196,7 @@ const getAsignaturasAlumno = (request, response) => {
 
   pool.query('SELECT * FROM public.asignaturas WHERE "ID" IN (SELECT "ID" FROM public.alumnos_asignaturas where "NIA" = $1 )', [NIA], (error, results) => {
     if (error) {
-      throw error
+      response.status(400).send(`Error`)
     }
     response.status(200).json(results.rows)
   })
