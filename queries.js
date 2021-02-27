@@ -94,6 +94,7 @@ const deleteAlumno = (request, response) => {
 }
 const updateAlumno = (request, response) => {
   const { NIA, nombre, apellido } = request.body
+  console.log('UPDATE public.alumnos SET "nombre" = $2, "apellido" = $3 WHERE "NIA" = $1', [NIA, nombre, apellido]);
   pool.query(
     'UPDATE public.alumnos SET "nombre" = $2, "apellido" = $3 WHERE "NIA" = $1', [NIA, nombre, apellido],
     (error, results) => {
