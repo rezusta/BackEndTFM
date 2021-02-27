@@ -106,8 +106,8 @@ const updateAlumno = (request, response) => {
   )
 }
 const createAsignatura = (request, response) => {
-  const { nombre, aula, dia, hora, año } = request.body
-  pool.query('INSERT INTO public.asignaturas ("nombre", "aula", "dia", "hora", "año") VALUES ($1, $2, $3, $4, $5)', [nombre, aula, dia, hora, año], 
+  const { nombre, aula, dia, hora, ano } = request.body
+  pool.query('INSERT INTO public.asignaturas ("nombre", "aula", "dia", "hora", "ano") VALUES ($1, $2, $3, $4, $5)', [nombre, aula, dia, hora, ano], 
     (error, results) => {
     if (error) {
       response.status(400).send(`Error`)
@@ -127,9 +127,9 @@ const getAsignatura = (request, response) => {
   })
 }
 const updateAsignatura = (request, response) => {
-  const { ID, nombre, aula, dia, hora, año } = request.body
+  const { ID, nombre, aula, dia, hora, ano } = request.body
   pool.query(
-    'UPDATE public.asignaturas SET "nombre" = $1, "aula" = $2, "dia" = $3, "hora" = $4, "año" = $5 WHERE "ID" = $6', [nombre, aula, dia, hora, año, ID],
+    'UPDATE public.asignaturas SET "nombre" = $1, "aula" = $2, "dia" = $3, "hora" = $4, "ano" = $5 WHERE "ID" = $6', [nombre, aula, dia, hora, ano, ID],
     (error, results) => {
       if (error) {
         response.status(400).send(`Error`)
