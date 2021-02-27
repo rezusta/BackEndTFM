@@ -124,7 +124,7 @@ const getAsignatura = (request, response) => {
       throw error
     }
     response.status(200).json(results.rows)
-  }) 
+  })  
 }
 const updateAsignatura = (request, response) => {
   const { ID, nombre, aula, dia, hora, ano } = request.body
