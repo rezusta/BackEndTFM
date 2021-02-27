@@ -62,7 +62,7 @@ const del = (request, response) => {
 
 const createAlumno = (request, response) => {
   const { NIA, nombre, apellido } = request.body
-  pool.query('INSERT INTO public.alumnos (NIA, nombre, apellido) VALUES ($1, $2, $3)', [NIA, nombre, apellido], 
+  pool.query('INSERT INTO public.alumnos ("NIA", "nombre", "apellido") VALUES ($1, $2, $3)', [NIA, nombre, apellido], 
     (error, results) => {
     if (error) {
       throw error
@@ -72,7 +72,7 @@ const createAlumno = (request, response) => {
 }
 const getAlumno = (request, response) => {
   const NIA = parseInt(request.params.NIA)
-  pool.query('SELECT * FROM public.alumnos where NIA = $1', [NIA], (error, results) => {
+  pool.query('SELECT * FROM public.alumnos where "NIA" = $1', [NIA], (error, results) => {
     if (error) {
       throw error
     }
@@ -82,7 +82,7 @@ const getAlumno = (request, response) => {
 const deleteAlumno = (request, response) => {
   const NIA = parseInt(request.params.NIA)
 
-  pool.query('DELETE FROM public.alumnos WHERE NIA = $1', [NIA], (error, results) => {
+  pool.query('DELETE FROM public.alumnos WHERE "NIA" = $1', [NIA], (error, results) => {
     if (error) {
       throw error
     }
@@ -92,7 +92,7 @@ const deleteAlumno = (request, response) => {
 const updateAlumno = (request, response) => {
   const { NIA, nombre, apellido } = request.body
   pool.query(
-    'UPDATE public.alumnos SET NIA = $1, nombre = $2, apellido = $3', [NIA, nombre, apellido],
+    'UPDATE public.alumnos SET "NIA" = $1, "nombre" = $2, "apellido" = $3', [NIA, nombre, apellido],
     (error, results) => {
       if (error) {
         throw error
@@ -103,7 +103,7 @@ const updateAlumno = (request, response) => {
 }
 const createAsignatura = (request, response) => {
   const { nombre, aula, dia, hora, año } = request.body
-  pool.query('INSERT INTO public.asignaturas (nombre, aula, dia, hora, año) VALUES ($1, $2, $3, $4, $5)', [nombre, aula, dia, hora, año], 
+  pool.query('INSERT INTO public.asignaturas ("nombre", "aula", "dia", "hora", "año") VALUES ($1, $2, $3, $4, $5)', [nombre, aula, dia, hora, año], 
     (error, results) => {
     if (error) {
       throw error
@@ -113,7 +113,7 @@ const createAsignatura = (request, response) => {
 }
 const getAsignatura = (request, response) => {
   const ID = parseInt(request.params.ID)
-  pool.query('SELECT * FROM public.asignaturas where ID = $1', [ID], (error, results) => {
+  pool.query('SELECT * FROM public.asignaturas where "ID" = $1', [ID], (error, results) => {
     if (error) {
       throw error
     }
@@ -123,7 +123,7 @@ const getAsignatura = (request, response) => {
 const updateAsignatura = (request, response) => {
   const { ID, nombre, aula, dia, hora, año } = request.body
   pool.query(
-    'UPDATE public.asignaturas SET nombre = $1, aula = $2, dia = $3, hora = $4, año = $5 WHERE ID = $6', [nombre, aula, dia, hora, año, ID],
+    'UPDATE public.asignaturas SET "nombre" = $1, "aula" = $2, "dia" = $3, "hora" = $4, "año" = $5 WHERE "ID" = $6', [nombre, aula, dia, hora, año, ID],
     (error, results) => {
       if (error) {
         throw error
@@ -135,7 +135,7 @@ const updateAsignatura = (request, response) => {
 const deleteAsignatura = (request, response) => {
   const ID = parseInt(request.params.ID)
 
-  pool.query('DELETE FROM public.asignaturas WHERE ID = $1', [ID], (error, results) => {
+  pool.query('DELETE FROM public.asignaturas WHERE "ID" = $1', [ID], (error, results) => {
     if (error) {
       throw error
     }
@@ -144,7 +144,7 @@ const deleteAsignatura = (request, response) => {
 }
 const createAlumnoAsignatura = (request, response) => {
   const { NIA, ID } = request.body
-  pool.query('INSERT INTO public.alumnos_asignaturas (ID, NIA) VALUES ($1, $2)', [NIA, ID], 
+  pool.query('INSERT INTO public.alumnos_asignaturas ("ID", "NIA") VALUES ($1, $2)', [NIA, ID], 
     (error, results) => {
     if (error) {
       throw error
@@ -156,7 +156,7 @@ const deleteAlumnoAsignatura = (request, response) => {
   const NIA = parseInt(request.params.NIA)
   const ID = parseInt(request.params.ID)
 
-  pool.query('DELETE FROM public.alumnos_asignaturas WHERE NIA = $1 and ID = $2', [NIA, ID], (error, results) => {
+  pool.query('DELETE FROM public.alumnos_asignaturas WHERE "NIA" = $1 and "ID" = $2', [NIA, ID], (error, results) => {
     if (error) {
       throw error
     }
@@ -184,7 +184,7 @@ const getAsignaturasAlumnoDia = (request, response) => {
   const dia = parseInt(request.params.dia)
 
   // Revisar
-  pool.query('SELECT * FROM public.asignaturas WHERE ID IN (SELECT ID FROM public.alumnos_asignaturas where NIA = $1 ) and dia = $2', [NIA, dia], (error, results) => {
+  pool.query('SELECT * FROM public.asignaturas WHERE "ID" IN (SELECT "ID" FROM public.alumnos_asignaturas where "NIA" = $1 ) and "dia" = $2', [NIA, dia], (error, results) => {
     if (error) {
       throw error
     }
@@ -194,7 +194,7 @@ const getAsignaturasAlumnoDia = (request, response) => {
 const getAsignaturasAlumno = (request, response) => {
   const NIA = parseInt(request.params.NIA)
 
-  pool.query('SELECT * FROM public.asignaturas WHERE ID IN (SELECT ID FROM public.alumnos_asignaturas where NIA = $1 )', [NIA], (error, results) => {
+  pool.query('SELECT * FROM public.asignaturas WHERE "ID" IN (SELECT "ID" FROM public.alumnos_asignaturas where "NIA" = $1 )', [NIA], (error, results) => {
     if (error) {
       throw error
     }
