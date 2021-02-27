@@ -95,7 +95,7 @@ const deleteAlumno = (request, response) => {
 const updateAlumno = (request, response) => {
   const { NIA, nombre, apellido } = request.body
   pool.query(
-    'UPDATE public.alumnos SET "NIA" = $1, "nombre" = $2, "apellido" = $3', [NIA, nombre, apellido],
+    'UPDATE public.alumnos SET "nombre" = $2, "apellido" = $3 WHERE "NIA" = $1', [NIA, nombre, apellido],
     (error, results) => {
       if (error) {
         response.status(400).send(`Error`)
