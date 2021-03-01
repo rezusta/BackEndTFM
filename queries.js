@@ -152,7 +152,7 @@ const deleteAsignatura = (request, response) => {
 }
 const createAlumnoAsignatura = (request, response) => {
   const { NIA, ID } = request.body
-  pool.query('INSERT INTO public.alumnos_asignaturas ("ID", "NIA") VALUES ($1, $2)', [NIA, ID], 
+  pool.query('INSERT INTO public.alumnos_asignaturas ("ID", "NIA") VALUES ($1, $2)', [ID, NIA], 
     (error, results) => {
     if (error) {
       response.status(400).send(`Error`)
