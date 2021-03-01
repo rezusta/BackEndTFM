@@ -28,8 +28,8 @@ app.post('/api/asignatura', db.createAsignatura)
 app.put('/api/asignatura', db.updateAsignatura)
 app.delete('/api/asignatura/:ID', db.deleteAsignatura)
 
-app.get('/api/alumno/:NIA/asingaturas', db.getAsignaturasAlumno)
-app.get('/api/alumno/:NIA/asingaturas/:dia', db.getAsignaturasAlumnoDia)
+app.get('/api/alumno/:NIA/asignaturas', db.getAsignaturasAlumno)
+app.get('/api/alumno/:NIA/asignaturas/:dia', db.getAsignaturasAlumnoDia)
 app.post('/api/alumnoAsignatura', db.createAlumnoAsignatura)
 app.delete('/api/asignatura/:ID/alumno/:NIA', db.deleteAlumnoAsignatura)
 
